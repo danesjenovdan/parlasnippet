@@ -1,0 +1,13 @@
+.idea/
+nohup.out
+composer.lock
+composer.phar
+vendor/
+gitignore/
+inc/config.php
+inc/config_custom.php
+sqls.txt
+tmp.html
+php/config.php
+php/conf.db.php
+php/conf_local.db.php

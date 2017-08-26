@@ -1,0 +1,24 @@
+{
+  "name": "parlatube",
+  "description": "A router for parlatube api application",
+  "keywords": ["microframework", "rest", "router", "parlatube", "api"],
+  "homepage": "https://bitbucket.org/klemensek/parlatube",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "dnd"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "config": {
+    "process-timeout" : 0
+  },
+  "scripts": {
+    "build": "php create.php ",
+    "start": "php -S 0.0.0.0:8080 ",
+    "start7": "C:\\wamp64\\bin\\php\\php7.0.4\\php7 -S 0.0.0.0:8080 "
+  }
+
+}
