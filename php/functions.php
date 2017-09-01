@@ -149,6 +149,80 @@ function setHeaders(){
     header('Expires: ' . gmdate('D, d M Y H:i:s', time() + (604800)) . ' GMT');
 }
 
+
+function getCache($cacheKey){
+    if(!USE_CACHE){
+        return false;
+    }
+
+    $result = cache_get($cacheKey);
+    if(!empty($result)){
+        echo ($result);
+        die();
+    }
+}
+function getCache_($cacheKey){
+    if(!USE_CACHE){
+        return false;
+    }
+
+    $c = new SimpleCache();
+    $result = $c->get_cache($cacheKey);
+
+    if(!empty($result)){
+        echo json_encode($result);
+        die();
+    }
+}
+function setCache_($cacheKey, $data){
+    if(!USE_CACHE){
+        return false;
+    }
+
+    $c = new SimpleCache();
+    $c->set_cache($cacheKey, $data);
+}
+function setCache($cacheKey, $data, $toArray=false){
+    if(!USE_CACHE){
+        return false;
+    }
+
+    if($toArray){
+        $e = null;
+        foreach ($data as $item) {
+            $e[] = $item->export();
+        }
+        cache_set($cacheKey, json_encode($e));
+        die();
+    }
+
+    cache_set($cacheKey, json_encode($data->export()));
+
+}
+
+function cache_set($key, $val) {
+    $val = var_export($val, true);
+
+    // HHVM fails at __set_state, so just use object cast for now
+    $val = str_replace('stdClass::__set_state', '(object)', $val);
+    $val = str_replace('RedBeanPHP\OODBBean::__set_state', '(object)', $val);
+    $val = str_replace('RedBeanPHP\BeanHelper\SimpleFacadeBeanHelper::__set_state', '(object)', $val);
+
+    // Write to temp file first to ensure atomicity
+    $tmp = "cache/$key." . uniqid('', true) . '.tmp';
+    file_put_contents($tmp, '<?php $val = ' . $val . ';', LOCK_EX);
+    rename($tmp, "cache/$key");
+}
+
+function cache_get($key = "getAll") {
+
+    @include dirname(__FILE__)."/../cache/$key";
+
+    //include "../cache/$key";
+
+    return isset($val) ? $val : false;
+}
+
 /******************/
 /*
 $_POST = array(

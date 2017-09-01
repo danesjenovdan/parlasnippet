@@ -12,3 +12,4 @@ php/config.php
 php/conf.db.php
 php/conf_local.db.php
 adminer.php
+cache/

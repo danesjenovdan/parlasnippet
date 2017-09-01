@@ -4,22 +4,36 @@ require "php/config.php";
 $router = new minirouter();
 $router->a('/getVideo', function(){
     header ('Content-type: application/json; charset=utf-8');
+
+    $cacheKey = "getVideo";
+    getCache($cacheKey);
+
     $book = R::load("video", $_GET["id"]);
 
     echo json_encode($book);
+
+    setCache($cacheKey, $book);
 });
 
 
 $router->a('/getSnippets', function(){
     header ('Content-type: application/json; charset=utf-8');
 
+    $cacheKey = "getSnippets";
+    getCache($cacheKey);
+
     $books = R::findAll( 'snippet' , ' ORDER BY id ASC' );
 
     echo json_encode($books);
+
+    setCache($cacheKey, $books, true);
 });
 
 $router->a('/getPlaylists', function(){
     header ('Content-type: application/json; charset=utf-8');
+
+    $cacheKey = "getPlaylists";
+    getCache($cacheKey);
 
     $books = R::findAll( 'playlist' , ' ORDER BY id ASC' );
 
@@ -37,20 +51,32 @@ $router->a('/getPlaylists', function(){
     }
 
     echo json_encode($books);
+
+    setCache($cacheKey, $books, true);
 });
 
 
 $router->a('/getSnippet', function(){
     header ('Content-type: application/json; charset=utf-8');
+
+    $cacheKey = "getSnippet".$_GET["id"];
+    getCache($cacheKey);
+
     $book = R::load("snippet", $_GET["id"]);
     $book->start_time = (int)$book->start_time;
     $book->end_time = (int)$book->end_time;
 
     echo json_encode($book);
+
+    setCache($cacheKey, $book);
 });
 
 $router->a('/getPlaylist', function(){
     header ('Content-type: application/json; charset=utf-8');
+
+    $cacheKey = "getPlaylist".$_GET["id"];
+    getCache($cacheKey);
+
     $book = R::load("playlist", $_GET["id"]);
 
     $snippets = explode(",", $book->snippets);
@@ -64,14 +90,18 @@ $router->a('/getPlaylist', function(){
     $book->snippets = $snippetsList;
 
     echo json_encode($book);
+
+    setCache($cacheKey, $book);
 });
 
 
 $router->a('/getAll', function(){
     header ('Content-type: application/json; charset=utf-8');
 
-    $videos = R::findAll( 'video' , ' ORDER BY id ASC' );
+    $cacheKey = "getAll";
+    getCache($cacheKey);
 
+    $videos = R::findAll( 'video' , ' ORDER BY id ASC' );
     foreach ($videos as $video) {
 
 
@@ -95,7 +125,10 @@ $router->a('/getAll', function(){
         $video->playlists = $playlistList;
     }
 
-    echo json_encode($video);
+    echo json_encode($videos);
+
+    setCache($cacheKey, $videos, true);
+
 });
 
 
