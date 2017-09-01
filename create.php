@@ -40,8 +40,9 @@ var_dump($shortened_url);
 $section = "playlist";
 $book = R::dispense($section);
 $book->name = "playlist";
-$book->snippet_order = "snippet_id_1|snippet_id_2|snippet_id_3";
+$book->snippets = "snippet_id_1|snippet_id_2|snippet_id_3";
 $book->published = true;
+$book->video_id = 1;
 R::store($book);
 var_dump($book);
 

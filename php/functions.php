@@ -109,6 +109,22 @@ function saveSnippet($data){
 }
 
 
+
+function savePlaylist($data){
+    $data = util_array_trim($data, true);
+
+    $section = "playlist";
+    $book = R::dispense($section);
+    $book->name = $data["name"];
+    $book->snippets = $data["snippets"];
+    $book->published = true;
+    $book->video_id = ($data["video_id"]>0)? $data["video_id"] : 1;
+    R::store($book);
+
+    return $book;
+}
+
+
 function setHeaders(){
     if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
         $if_modified_since = preg_replace('/;.*$/', '',   $_SERVER['HTTP_IF_MODIFIED_SINCE']);
