@@ -14,8 +14,10 @@ R::freeze(false) - tables/fields will be created on the fly
 ### 2. run:
 
 - composer build or  
-- mysql restore (mysqldump.sql)
+- mysql restore (mysqldump.sql) or
+- run create.php
 - remove create.php
+- make folder cache
 
 ### 3. usage 
 - run composer start or composer start7 (fix path to php7 executable)

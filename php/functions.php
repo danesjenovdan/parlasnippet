@@ -151,7 +151,7 @@ function setHeaders(){
 
 
 function getCache($cacheKey){
-    if(!USE_CACHE){
+    if(!CACHE){
         return false;
     }
 
@@ -162,7 +162,7 @@ function getCache($cacheKey){
     }
 }
 function getCache_($cacheKey){
-    if(!USE_CACHE){
+    if(!CACHE){
         return false;
     }
 
@@ -175,7 +175,7 @@ function getCache_($cacheKey){
     }
 }
 function setCache_($cacheKey, $data){
-    if(!USE_CACHE){
+    if(!CACHE){
         return false;
     }
 
@@ -183,7 +183,7 @@ function setCache_($cacheKey, $data){
     $c->set_cache($cacheKey, $data);
 }
 function setCache($cacheKey, $data, $toArray=false){
-    if(!USE_CACHE){
+    if(!CACHE){
         return false;
     }
 
@@ -209,17 +209,14 @@ function cache_set($key, $val) {
     $val = str_replace('RedBeanPHP\BeanHelper\SimpleFacadeBeanHelper::__set_state', '(object)', $val);
 
     // Write to temp file first to ensure atomicity
-    $tmp = "cache/$key." . uniqid('', true) . '.tmp';
+    $tmp = CACHE_DIR . "$key." . uniqid('', true) . '.tmp';
     file_put_contents($tmp, '<?php $val = ' . $val . ';', LOCK_EX);
-    rename($tmp, "cache/$key");
+    rename($tmp, CACHE_DIR . "$key");
 }
 
 function cache_get($key = "getAll") {
 
-    @include dirname(__FILE__)."/../cache/$key";
-
-    //include "../cache/$key";
-
+    @include CACHE_DIR . $key;
     return isset($val) ? $val : false;
 }
 

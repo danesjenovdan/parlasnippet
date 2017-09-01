@@ -4,20 +4,17 @@ require(dirname(__FILE__).'/functions.php');
 
 //setHeaders();
 
-define('STARTTIME', time() + microtime());
-
 define('DB_SERVER', "localhost");
 define('DB_USERNAME', "postgres");
 define('DB_PASSWORD', "root");
 define('DB_DATABASE', "parlatube");
 
-define('BASE_HREF', 'http://' . $_SERVER['HTTP_HOST'] . '/');
 define('LIMIT_TO_IP', $_SERVER['REMOTE_ADDR']);
-define('TRACK', true);
-define('CHECK_URL', FALSE);
 define('ALLOWED_CHARS', '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-define('CACHE', false);
-define('CACHE_DIR', dirname(__FILE__) . '/cache/');
+
+define('CACHE', true);
+define('CACHE_DIR', dirname(__FILE__) . '/../cache/');
+//define('CACHE_DIR', '/home/parladaddy/parlasnippet/cache/');
 
 date_default_timezone_set('Europe/Ljubljana');
 
