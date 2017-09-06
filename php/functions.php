@@ -12,10 +12,10 @@ function getShortenedURLFromID ($integer, $base = ALLOWED_CHARS)
     $length = strlen($base);
     while($integer > $length - 1)
     {
-        $out = $base[fmod($integer, $length)] . $out;
+        $out = $base[(int)fmod($integer, $length)] . $out;
         $integer = floor( $integer / $length );
     }
-    return $base[$integer] . $out;
+    return $base[(int)$integer] . $out;
 }
 
 function getIDFromShortenedURL ($string, $base = ALLOWED_CHARS)

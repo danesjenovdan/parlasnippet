@@ -28,7 +28,32 @@ $(function () {
     jqxhr.always(function () {
 
     });
-
+    //
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
+    // var jqxhr = $.post(domain + "/setSnippet", data, function () {  });
 
     var data = {
         name: "my playstlie",
