@@ -77,6 +77,7 @@ function saveSnippet($data){
     $section = "snippet";
     $book = R::dispense($section);
     $book->video_id = $data["video_id"];
+    $book->name = $data["name"];
     $book->start_time = (int)$data["start_time"];
     $book->end_time = (int)$data["end_time"];
     $book->extras = $data["extras"];
@@ -119,6 +120,7 @@ function savePlaylist($data){
     $book->snippets = $data["snippets"];
     $book->published = true;
     $book->video_id = ($data["video_id"]>0)? $data["video_id"] : 1;
+    $book->image_url = $data["image_url"];
     R::store($book);
 
     return $book;

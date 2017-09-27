@@ -5,6 +5,7 @@ $(function () {
 
     var data = {
         video_id: 1,
+        name: "snippet title",
         start_time: 1321654987654,
         end_time: 1321654987654,
         extras: "fdg sdfg dfg dfg df",
@@ -59,6 +60,7 @@ $(function () {
         name: "my playstlie",
         snippets: "16,18,20",
         published: 1,
+        image_url: "http://myimage.gif",
         video_id: 1
     }
 
