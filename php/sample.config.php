@@ -15,6 +15,7 @@ define('ALLOWED_CHARS', '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
 define('CACHE', true);
 define('CACHE_DIR', dirname(__FILE__) . '/../cache/');
 //define('CACHE_DIR', '/home/parladaddy/parlasnippet/cache/');
+define('CACHELIFETIME', 10);
 
 date_default_timezone_set('Europe/Ljubljana');
 

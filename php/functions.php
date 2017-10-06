@@ -1,31 +1,30 @@
 <?php
 
-function debug($d){
+function debug($d)
+{
     $k = (time() + microtime() - STARTTIME);
     $txt = sprintf("time: %.4f\n", $k);
-    var_dump($d . ' - '.sprintf("%.4f", STARTTIME).' - ' .$txt);
+    var_dump($d . ' - ' . sprintf("%.4f", STARTTIME) . ' - ' . $txt);
 }
 
-function getShortenedURLFromID ($integer, $base = ALLOWED_CHARS)
+function getShortenedURLFromID($integer, $base = ALLOWED_CHARS)
 {
     $out = '';
     $length = strlen($base);
-    while($integer > $length - 1)
-    {
+    while ($integer > $length - 1) {
         $out = $base[(int)fmod($integer, $length)] . $out;
-        $integer = floor( $integer / $length );
+        $integer = floor($integer / $length);
     }
     return $base[(int)$integer] . $out;
 }
 
-function getIDFromShortenedURL ($string, $base = ALLOWED_CHARS)
+function getIDFromShortenedURL($string, $base = ALLOWED_CHARS)
 {
     $length = strlen($base);
     $size = strlen($string) - 1;
     $string = str_split($string);
     $out = strpos($base, array_pop($string));
-    foreach($string as $i => $char)
-    {
+    foreach ($string as $i => $char) {
         $out += strpos($base, $char) * pow($length, $size - $i);
     }
     return $out;
@@ -43,12 +42,13 @@ function util_array_trim(array &$array, $filter = false)
     return $array;
 }
 
-function handleUrlPath(){
+function handleUrlPath()
+{
     $ruri = $_SERVER["REQUEST_URI"];
-    if(strpos($ruri, "?")!==false) {
+    if (strpos($ruri, "?") !== false) {
         $ruri = substr($ruri, 0, strpos($ruri, "?"));
-    }else{
-        if(strpos($ruri, "&")!==false) {
+    } else {
+        if (strpos($ruri, "&") !== false) {
             $ruri = substr($ruri, 0, strpos($ruri, "&"));
         }
     }
@@ -58,11 +58,14 @@ function handleUrlPath(){
 class minirouter
 {
     private $router = [];
-    function a($router, callable $c){
+
+    function a($router, callable $c)
+    {
         $this->router[$router] = $c;
     }
 
-    function e() {
+    function e()
+    {
         $p = handleUrlPath();
         $k = isset($this->router[$p]) ? $this->router[$p] : $this->router[''];
         $k();
@@ -70,7 +73,8 @@ class minirouter
 }
 
 
-function saveSnippet($data){
+function saveSnippet($data)
+{
     $data = util_array_trim($data, true);
 
 
@@ -110,8 +114,8 @@ function saveSnippet($data){
 }
 
 
-
-function savePlaylist($data){
+function savePlaylist($data)
+{
     $data = util_array_trim($data, true);
 
     $section = "playlist";
@@ -119,7 +123,7 @@ function savePlaylist($data){
     $book->name = $data["name"];
     $book->snippets = $data["snippets"];
     $book->published = true;
-    $book->video_id = ($data["video_id"]>0)? $data["video_id"] : 1;
+    $book->video_id = ($data["video_id"] > 0) ? $data["video_id"] : 1;
     $book->image_url = $data["image_url"];
     R::store($book);
 
@@ -127,9 +131,10 @@ function savePlaylist($data){
 }
 
 
-function setHeaders(){
+function setHeaders()
+{
     if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
-        $if_modified_since = preg_replace('/;.*$/', '',   $_SERVER['HTTP_IF_MODIFIED_SINCE']);
+        $if_modified_since = preg_replace('/;.*$/', '', $_SERVER['HTTP_IF_MODIFIED_SINCE']);
     } else {
         $if_modified_since = '';
     }
@@ -152,44 +157,51 @@ function setHeaders(){
 }
 
 
-function getCache($cacheKey){
-    if(!CACHE){
+function getCache($cacheKey)
+{
+    if (!CACHE) {
         return false;
     }
 
     $result = cache_get($cacheKey);
-    if(!empty($result)){
-        echo ($result);
+    if (!empty($result)) {
+        echo($result);
         die();
     }
 }
-function getCache_($cacheKey){
-    if(!CACHE){
+
+function getCache_($cacheKey)
+{
+    if (!CACHE) {
         return false;
     }
 
     $c = new SimpleCache();
     $result = $c->get_cache($cacheKey);
 
-    if(!empty($result)){
+    if (!empty($result)) {
         echo json_encode($result);
         die();
     }
 }
-function setCache_($cacheKey, $data){
-    if(!CACHE){
+
+function setCache_($cacheKey, $data)
+{
+    if (!CACHE) {
         return false;
     }
 
     $c = new SimpleCache();
     $c->set_cache($cacheKey, $data);
 }
-function setCache($cacheKey, $data, $toArray=false){
-    if(!CACHE){
+
+function setCache($cacheKey, $data, $toArray = false)
+{
+    if (!CACHE) {
         return false;
     }
 
-    if($toArray){
+    if ($toArray) {
         $e = null;
         foreach ($data as $item) {
             $e[] = $item->export();
@@ -202,7 +214,8 @@ function setCache($cacheKey, $data, $toArray=false){
 
 }
 
-function cache_set($key, $val) {
+function cache_set($key, $val)
+{
     $val = var_export($val, true);
 
     // HHVM fails at __set_state, so just use object cast for now
@@ -216,41 +229,12 @@ function cache_set($key, $val) {
     rename($tmp, CACHE_DIR . "$key");
 }
 
-function cache_get($key = "getAll") {
-
-    @include CACHE_DIR . $key;
-    return isset($val) ? $val : false;
+function cache_get($key = "getAll")
+{
+    if (file_exists(CACHE_DIR . $key) && (filemtime(CACHE_DIR . $key) + CACHELIFETIME >= time())) {
+        @include CACHE_DIR . $key;
+        return isset($val) ? $val : false;
+    } else {
+        return false;
+    }
 }
-
-/******************/
-/*
-$_POST = array(
-    'product_id'    => 'libgd<script>',
-    'component'     => '10',
-    'versions'      => '2.0.33',
-    'testscalar'    => array('2', '23', '10', '12'),
-    'testarray'     => '2',
-);
-*/
-/*
-$args = array(
-    'product_id'   => FILTER_SANITIZE_ENCODED,
-    'component'    => array('filter'    => FILTER_VALIDATE_INT,
-        'flags'     => FILTER_REQUIRE_ARRAY,
-        'options'   => array('min_range' => 1, 'max_range' => 10)
-    ),
-    'versions'     => FILTER_SANITIZE_ENCODED,
-    'doesnotexist' => FILTER_VALIDATE_INT,
-    'testscalar'   => array(
-        'filter' => FILTER_VALIDATE_INT,
-        'flags'  => FILTER_REQUIRE_SCALAR,
-    ),
-    'testarray'    => array(
-        'filter' => FILTER_VALIDATE_INT,
-        'flags'  => FILTER_REQUIRE_ARRAY,
-    )
-
-);
-
-$myinputs = filter_input_array(INPUT_POST, $args);
-*/
