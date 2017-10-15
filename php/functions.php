@@ -88,6 +88,14 @@ function saveSnippet($data)
     $book->short_url = "";
     $book->published = $data["published"];
     $book->looping = $data["looping"];
+
+    if(!empty($data["muted"])){
+        $book->muted = $data["muted"];
+    }else{
+        $book->muted = 0;
+    }
+    
+    $book->ts = date("Y-m-d H:i:s");
     R::store($book);
     //$snippet_id = R::getInsertID();
     $snippet_id = $book->id;

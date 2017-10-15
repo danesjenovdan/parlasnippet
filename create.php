@@ -14,12 +14,15 @@ var_dump($book);
 $section = "snippet";
 $book = R::dispense($section);
 $book->video_id = 1;
-$book->start_time = (int)substr(date("YmdHisu"), 0, -3);;
-$book->end_time = (int)substr(date("YmdHisu"), 0, -3);;
+$book->start_time = (int)substr(date("YmdHisu"), 0, -3);
+$book->end_time = (int)substr(date("YmdHisu"), 0, -3);
 $book->extras = "lorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsumlorem ipsum lorem ipsum";
 $book->short_url = "shortan";
 $book->published = true;
 $book->looping = true;
+$book->muted = 0;
+$book->ts = date("Y-m-d H:i:s");
+
 R::store($book);
 var_dump($book);
 
