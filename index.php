@@ -5,8 +5,8 @@ $router = new minirouter();
 $router->a('/getVideo', function(){
     header ('Content-type: application/json; charset=utf-8');
 
-    $cacheKey = "getVideo";
-    getCache($cacheKey);
+    $cacheKey = "getVideo".$_GET["id"];
+    getCache($cacheKey, CACHELIFETIME_VIDEO_SINGLE);
 
     $book = R::load("video", $_GET["id"]);
 
@@ -20,7 +20,7 @@ $router->a('/getSnippets', function(){
     header ('Content-type: application/json; charset=utf-8');
 
     $cacheKey = "getSnippets";
-    getCache($cacheKey);
+    getCache($cacheKey, CACHELIFETIME_SNIPPET_ALL);
 
     $books = R::findAll( 'snippet' , ' ORDER BY id ASC' );
 
@@ -33,7 +33,7 @@ $router->a('/getPlaylists', function(){
     header ('Content-type: application/json; charset=utf-8');
 
     $cacheKey = "getPlaylists";
-    getCache($cacheKey);
+    getCache($cacheKey, CACHELIFETIME_PLAYLIST_SINGLE);
 
     $books = R::findAll( 'playlist' , ' ORDER BY id ASC' );
 
@@ -60,7 +60,7 @@ $router->a('/getSnippet', function(){
     header ('Content-type: application/json; charset=utf-8');
 
     $cacheKey = "getSnippet".$_GET["id"];
-    getCache($cacheKey);
+    getCache($cacheKey, CACHELIFETIME_SNIPPET_SINGLE);
 
     $book = R::load("snippet", $_GET["id"]);
     $book->start_time = (int)$book->start_time;
@@ -75,7 +75,7 @@ $router->a('/getSnippetsLast', function(){
     header ('Content-type: application/json; charset=utf-8');
 
     $cacheKey = "getSnippetsLast";
-    getCache($cacheKey, 10);
+    getCache($cacheKey, CACHELIFETIME_SNIPPET_LAST);
 
     $books = R::findAll( 'snippet' , ' ORDER BY id DESC limit 6' );
 
@@ -88,7 +88,7 @@ $router->a('/getPlaylist', function(){
     header ('Content-type: application/json; charset=utf-8');
 
     $cacheKey = "getPlaylist".$_GET["id"];
-    getCache($cacheKey);
+    getCache($cacheKey, CACHELIFETIME_PLAYLIST_SINGLE);
 
     $book = R::load("playlist", $_GET["id"]);
 
@@ -112,7 +112,7 @@ $router->a('/getAll', function(){
     header ('Content-type: application/json; charset=utf-8');
 
     $cacheKey = "getAll";
-    getCache($cacheKey);
+    getCache($cacheKey, CACHELIFETIME_ALL);
 
     $videos = R::findAll( 'video' , ' ORDER BY id ASC' );
     foreach ($videos as $video) {

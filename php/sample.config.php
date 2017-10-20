@@ -15,7 +15,13 @@ define('ALLOWED_CHARS', '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
 define('CACHE', true);
 define('CACHE_DIR', dirname(__FILE__) . '/../cache/');
 //define('CACHE_DIR', '/home/parladaddy/parlasnippet/cache/');
-define('CACHELIFETIME', 10);
+define('CACHELIFETIME', 20);
+define('CACHELIFETIME_SNIPPET_SINGLE', 10);
+define('CACHELIFETIME_SNIPPET_LAST', 10);
+define('CACHELIFETIME_SNIPPET_ALL', 10);
+define('CACHELIFETIME_VIDEO_SINGLE', 10);
+define('CACHELIFETIME_PLAYLIST_SINGLE', 10);
+define('CACHELIFETIME_ALL', 10);
 
 date_default_timezone_set('Europe/Ljubljana');
 
