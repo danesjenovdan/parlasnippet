@@ -94,7 +94,7 @@ function saveSnippet($data)
     }else{
         $book->muted = 0;
     }
-    
+
     $book->ts = date("Y-m-d H:i:s");
     R::store($book);
     //$snippet_id = R::getInsertID();
@@ -165,13 +165,13 @@ function setHeaders()
 }
 
 
-function getCache($cacheKey)
+function getCache($cacheKey, $lifeTime = 0)
 {
     if (!CACHE) {
         return false;
     }
 
-    $result = cache_get($cacheKey);
+    $result = cache_get($cacheKey, $lifeTime);
     if (!empty($result)) {
         echo($result);
         die();
@@ -237,9 +237,14 @@ function cache_set($key, $val)
     rename($tmp, CACHE_DIR . "$key");
 }
 
-function cache_get($key = "getAll")
+function cache_get($key = "getAll", $lifeTime = 0)
 {
-    if (file_exists(CACHE_DIR . $key) && (filemtime(CACHE_DIR . $key) + CACHELIFETIME >= time())) {
+    $cacheLifeTime = CACHELIFETIME;
+    if($lifeTime>0){
+        $cacheLifeTime = $lifeTime;
+    }
+
+    if (file_exists(CACHE_DIR . $key) && (filemtime(CACHE_DIR . $key) + $cacheLifeTime >= time())) {
         @include CACHE_DIR . $key;
         return isset($val) ? $val : false;
     } else {

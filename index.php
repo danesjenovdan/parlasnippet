@@ -71,6 +71,19 @@ $router->a('/getSnippet', function(){
     setCache($cacheKey, $book);
 });
 
+$router->a('/getSnippetLast', function(){
+    header ('Content-type: application/json; charset=utf-8');
+
+    $cacheKey = "getSnippetLast";
+    getCache($cacheKey, 10);
+
+    $books = R::findAll( 'snippet' , ' ORDER BY id DESC limit 6' );
+
+    echo json_encode($books);
+
+    setCache($cacheKey, $books, true);
+});
+
 $router->a('/getPlaylist', function(){
     header ('Content-type: application/json; charset=utf-8');
 
