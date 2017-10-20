@@ -208,19 +208,19 @@ $router->a('', function(){
 
     echo '
     <h3>getter:</h3>
-    http://snippet.knedl.si/getAll <br>
+    http://snippet.soocenje.24ur.com/getAll <br>
     
-    http://snippet.knedl.si/getVideo?id=1 <br>
+    http://snippet.soocenje.24ur.com/getVideo?id=1 <br>
     <br>
-    http://snippet.knedl.si/getSnippets <br>
-    http://snippet.knedl.si/getSnippet?id=1 <br>
+    http://snippet.soocenje.24ur.com/getSnippets <br>
+    http://snippet.soocenje.24ur.com/getSnippet?id=1 <br>
     <br>
-    http://snippet.knedl.si/getPlaylists <br>
-    http://snippet.knedl.si/getPlaylist?id=1 <br>
+    http://snippet.soocenje.24ur.com/getPlaylists <br>
+    http://snippet.soocenje.24ur.com/getPlaylist?id=1 <br>
     
     <br><br>
     <h3>setter:</h3>
-    POST na     http://snippet.knedl.si/setSnippet
+    POST na     http://snippet.soocenje.24ur.com/setSnippet
     <pre>
     var data = {
         video_id: 1,
@@ -233,7 +233,7 @@ $router->a('', function(){
     }
 </pre>
     <br>
-    POST na     http://snippet.knedl.si/setPlaylist
+    POST na     http://snippet.soocenje.24ur.com/setPlaylist
     <pre>
     var data = {
         name: "my playstlie",
