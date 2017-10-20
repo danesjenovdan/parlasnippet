@@ -71,10 +71,10 @@ $router->a('/getSnippet', function(){
     setCache($cacheKey, $book);
 });
 
-$router->a('/getSnippetLast', function(){
+$router->a('/getSnippetsLast', function(){
     header ('Content-type: application/json; charset=utf-8');
 
-    $cacheKey = "getSnippetLast";
+    $cacheKey = "getSnippetsLast";
     getCache($cacheKey, 10);
 
     $books = R::findAll( 'snippet' , ' ORDER BY id DESC limit 6' );
@@ -213,6 +213,7 @@ $router->a('', function(){
     http://snippet.soocenje.24ur.com/getVideo?id=1 <br>
     <br>
     http://snippet.soocenje.24ur.com/getSnippets <br>
+    http://snippet.soocenje.24ur.com/getSnippetsLast , limit 6<br>
     http://snippet.soocenje.24ur.com/getSnippet?id=1 <br>
     <br>
     http://snippet.soocenje.24ur.com/getPlaylists <br>
