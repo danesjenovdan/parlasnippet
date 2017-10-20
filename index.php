@@ -200,12 +200,20 @@ $router->a('/setPlaylist', function(){
 $router->a('/about', function(){
     header ('Content-type: text/html; charset=utf-8');
 
-    echo 'About';
+    echo '
+    <p>Portal Danes je nov dan je nastal jeseni 2012 kot sopotnik, integralni del in podpornik vstajniških gibanj. Od septembra 2013 delujemo kot inštitut, ki se osredotoča na (digitalno) politično participacijo, transparentnost in nadzor.</p>
+<p>KONTAKT</p>
+<p>http://danesjenovdan.si/</p>
+<p>+386 40 867 868</p>
+<p>vsi@danesjenovdan.si</p>
+<p>Parmova 20<br>
+1000 Ljubljana</p>
+    ';
 });
 
 $router->a('', function(){
     header ('Content-type: text/html; charset=utf-8');
-
+/*
     echo '
     <h3>getter:</h3>
     http://snippet.soocenje.24ur.com/getAll <br>
@@ -243,8 +251,9 @@ $router->a('', function(){
         published: 1
     }
     </pre>
-    
+
     ';
+*/
 });
 
 $router->e();
