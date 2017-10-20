@@ -77,7 +77,7 @@ $router->a('/getSnippetsLast', function(){
     $cacheKey = "getSnippetsLast";
     getCache($cacheKey, CACHELIFETIME_SNIPPET_LAST);
 
-    $books = R::findAll( 'snippet' , ' ORDER BY id DESC limit 6' );
+    $books = R::findAll( 'snippet' , ' ORDER BY id DESC limit 12' );
 
     echo json_encode($books);
 
